@@ -43,14 +43,4 @@ public class Character : MonoBehaviour
     {
         print($"The {name} is dead");
     }
-
-    public virtual void HealthRecover()
-    {
-
-    }
-
-    public virtual void Stun()
-    {
-
-    }
 }
