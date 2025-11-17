@@ -10,7 +10,6 @@ public class DetectionZone : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            // Передаем сигнал, что игрок замечен
             _mutant.SetPlayerDetected(other.transform, true);
         }
     }
@@ -19,7 +18,6 @@ public class DetectionZone : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            // Передаем сигнал, что игрок потерян
             _mutant.SetPlayerDetected(null, false);
         }
     }

@@ -28,7 +28,6 @@ public class Character : MonoBehaviour
         Health -= damage * _damageResist;
         if (Health <= 0)
         {
-            //death of character
             Health = 0;
             DeathInvoke();
         }

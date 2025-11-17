@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -10,8 +11,12 @@ public class Player : Character
     [SerializeField] private Transform _partToTurn;
     private float _speed = 2f;
 
-    public Bullet bulletPrefab;
-    public Transform firePoint;
+    public Bullet BulletPrefab;
+    public Transform FirePoint;
+
+    public bool HaveAmmo = true;
+
+    public event Action OnShoot;
 
     private void OnMove(InputValue value)
     {
@@ -32,12 +37,20 @@ public class Player : Character
 
     private void OnFire(InputValue value)
     {
-        Shoot();
+        if (HaveAmmo)
+        {
+            OnShoot?.Invoke();
+            Shoot();
+        }
     }
 
     void Shoot()
     {
-        var bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+        var viewDirection = BulletPrefab.transform.localScale;
+        viewDirection.x *= - Mathf.Sign(_partToTurn.transform.localScale.x);
+       
+        var bullet = Instantiate(BulletPrefab, FirePoint.position, FirePoint.rotation);
+        bullet.transform.localScale = viewDirection;
         bullet.SetBulletDamage(AttackForce);
     }
 }

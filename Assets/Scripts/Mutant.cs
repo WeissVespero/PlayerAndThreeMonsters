@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.EventSystems.EventTrigger;
 
 public class Mutant : Character
 {
@@ -9,13 +10,14 @@ public class Mutant : Character
 
     public float AttackRange;
 
-    private Transform _playerTarget;
-    private bool _isPlayerInRange = false;
-    private bool _isAtacking;
-
     [SerializeField] private Transform _partToTurn;
 
+    private Transform _playerTarget;
+    private bool _isPlayerInRange = false;
+    private bool _isAtacking;    
+
     public event Action<float> OnAttack;
+    public event Action<Mutant> OnDeath;
 
     void Update()
     {
@@ -25,12 +27,10 @@ public class Mutant : Character
 
             if (distanceToPlayer > AttackRange)
             {
-                // Приближение
                 MoveTowardsPlayer();
             }
             else
             {
-                // Атака
                 StartCoroutine(Attack());
             }
         }
@@ -40,17 +40,12 @@ public class Mutant : Character
     {
         _isPlayerInRange = detected;
         _playerTarget = target;
-
-        string state = detected ? "замечен" : "потерян";
-        Debug.Log($"Игрок {state}!");
     }
 
     private void MoveTowardsPlayer()
     {
-        // Вычисляем направление к игроку
         Vector3 direction = _playerTarget.position - transform.position;
         var viewDirection = _partToTurn.localScale;
-        // Перемещаем монстра в этом направлении
         if (direction.x > 0 && viewDirection.x < 0)
         {
             viewDirection.x = -viewDirection.x;
@@ -64,10 +59,16 @@ public class Mutant : Character
         }
 
         transform.position = Vector3.MoveTowards(transform.position, _playerTarget.position, MoveSpeed * Time.deltaTime);
-
-        // TODO: Здесь можно добавить анимацию бега
     }
 
+    public void MutantDamage(float damage)
+    {
+        Damage(damage);
+        if (Health <= 0)
+        {
+            OnDeath?.Invoke(this);
+        }
+    }
 
     private IEnumerator Attack()
     {
