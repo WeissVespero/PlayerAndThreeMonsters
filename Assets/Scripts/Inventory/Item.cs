@@ -6,6 +6,7 @@ using UnityEngine;
 public class Item : MonoBehaviour
 {
     public string ItemName;
+    public string ItemID;
     public Sprite Icon;
     public int StackSize;
 }

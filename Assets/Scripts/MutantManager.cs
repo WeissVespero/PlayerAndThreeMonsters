@@ -8,6 +8,8 @@ public class MutantManager : MonoBehaviour
 {
     public List<Mutant> EnemiesList = new List<Mutant>(); // types of enemies
 
+    [SerializeField] InventoryManager _inventoryManager;
+
     private float _spawnRangeX = 12f;
     private float _spawnRangeY = 12f;
 
@@ -40,6 +42,7 @@ public class MutantManager : MonoBehaviour
         _mutantCount--;
         mutant.OnAttack -= MutantAttack;
         mutant.OnDeath -= MutantDeath;
+        _inventoryManager.SpawnItemAtPlace(mutant.transform.position);
         Destroy(mutant.gameObject);
         if (_mutantCount == 0)
         {

@@ -11497,9 +11497,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c39876aafe5c6984e9d2b73b1e06ee72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 1247260377}
+  _target: {fileID: 1247260377}
   FollowSpeed: 0.125
-  offset: {x: 0, y: 0, z: -10}
+  Offset: {x: 0, y: 0, z: -10}
 --- !u!1 &589057951
 GameObject:
   m_ObjectHideFlags: 0
@@ -12229,11 +12229,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20b8356f03e80c5408d6fe1fba794ffb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemIcon: {fileID: 676933588}
-  stackText: {fileID: 198085301}
+  ItemIcon: {fileID: 676933588}
+  StackText: {fileID: 198085301}
   _removeButton: {fileID: 2126531698}
   _manager: {fileID: 1664071876}
-  slotIndex: 0
+  SlotIndex: 0
 --- !u!114 &778500964
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12326,11 +12326,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20b8356f03e80c5408d6fe1fba794ffb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemIcon: {fileID: 1707961585}
-  stackText: {fileID: 696790282}
+  ItemIcon: {fileID: 1707961585}
+  StackText: {fileID: 696790282}
   _removeButton: {fileID: 1689442163}
   _manager: {fileID: 1664071876}
-  slotIndex: 0
+  SlotIndex: 0
 --- !u!114 &940795137
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12398,12 +12398,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b348133ae4f93294ab77842c73086da3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  NumberOfBullets: 25
   _player: {fileID: 1375599821}
   _enemyManger: {fileID: 1751014571}
   _gameOverPanel: {fileID: 380986401}
   _gameOverText: {fileID: 1079571468}
   _ammoCounter: {fileID: 2023685}
-  NumberOfBullets: 25
 --- !u!4 &1024311028
 Transform:
   m_ObjectHideFlags: 0
@@ -12819,11 +12819,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20b8356f03e80c5408d6fe1fba794ffb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemIcon: {fileID: 1085179331}
-  stackText: {fileID: 1071865288}
+  ItemIcon: {fileID: 1085179331}
+  StackText: {fileID: 1071865288}
   _removeButton: {fileID: 1334037037}
   _manager: {fileID: 1664071876}
-  slotIndex: 0
+  SlotIndex: 0
 --- !u!114 &1087482544
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12862,6 +12862,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1087482541}
   m_CullTransparentMesh: 1
+--- !u!4 &1158772387 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8941450490720743208, guid: 6c99365f8aa8097468add28ea43bda92, type: 3}
+  m_PrefabInstance: {fileID: 2867494839948378591}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1159990250
 GameObject:
   m_ObjectHideFlags: 0
@@ -15730,7 +15735,7 @@ MonoBehaviour:
   - {fileID: 6263241091263804853, guid: 24019ae7ba73da340a03b12f70cc2ae5, type: 3}
   - {fileID: -2403082705555293666, guid: 36acd1631d021054ea76609e8327f4d2, type: 3}
   - {fileID: 2017952569279366222, guid: 148e403e5cea69d4eb552a99982edfc3, type: 3}
-  inventorySlots:
+  InventorySlots:
   - {fileID: 778500963}
   - {fileID: 1087482543}
   - {fileID: 940795136}
@@ -15961,9 +15966,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d195acbbd50bc174fb97d46d49dbeeca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemiesList:
+  EnemiesList:
   - {fileID: 8570487678984070858, guid: a863e516cc2faa44a832f22256a056a1, type: 3}
   - {fileID: 349534661607065551, guid: 39bda36f5d9412a4a84cd1c9f8b27161, type: 3}
+  _inventoryManager: {fileID: 1664071876}
 --- !u!4 &1751014572
 Transform:
   m_ObjectHideFlags: 0
@@ -15978,6 +15984,55 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1806510130
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1806510132}
+  - component: {fileID: 1806510131}
+  m_Layer: 0
+  m_Name: ItemDatabase
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1806510131
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1806510130}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee1222f3d94c5624ab019fa492ac0595, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  allItems:
+  - {fileID: 2017952569279366222, guid: 148e403e5cea69d4eb552a99982edfc3, type: 3}
+  - {fileID: -2403082705555293666, guid: 36acd1631d021054ea76609e8327f4d2, type: 3}
+  - {fileID: 6263241091263804853, guid: 24019ae7ba73da340a03b12f70cc2ae5, type: 3}
+  - {fileID: -2896982962395635312, guid: 424af8252c4dabf449236637889dc38b, type: 3}
+--- !u!4 &1806510132
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1806510130}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 550.5, y: 70, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2015428026
 GameObject:
@@ -16033,11 +16088,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20b8356f03e80c5408d6fe1fba794ffb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemIcon: {fileID: 334219843}
-  stackText: {fileID: 1643958645}
+  ItemIcon: {fileID: 334219843}
+  StackText: {fileID: 1643958645}
   _removeButton: {fileID: 1171614164}
   _manager: {fileID: 1664071876}
-  slotIndex: 0
+  SlotIndex: 0
 --- !u!114 &2015428029
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16204,6 +16259,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2867494838972198661, guid: 6c99365f8aa8097468add28ea43bda92, type: 3}
+      propertyPath: FirePoint
+      value: 
+      objectReference: {fileID: 1158772387}
+    - target: {fileID: 2867494838972198661, guid: 6c99365f8aa8097468add28ea43bda92, type: 3}
+      propertyPath: BulletPrefab
+      value: 
+      objectReference: {fileID: -5884242901075281994, guid: 3091aa7cd8e61cf4f8cf43b178232621, type: 3}
     - target: {fileID: 2867494838972198662, guid: 6c99365f8aa8097468add28ea43bda92, type: 3}
       propertyPath: m_RootOrder
       value: 3

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 public class InventoryManager : MonoBehaviour
@@ -14,6 +15,8 @@ public class InventoryManager : MonoBehaviour
 
     private int _numberOfItems = 7;
 
+    private string _savePath;
+
     void Awake()
     {
         _inventoryItems = new InventoryItemData[InventorySlots.Length];
@@ -24,6 +27,66 @@ public class InventoryManager : MonoBehaviour
             InventorySlots[i].ClearSlot();
         }
         SpawnItems();
+        _savePath = Path.Combine(Application.persistentDataPath, "inventory.json");
+
+        LoadInventory();
+    }
+
+    void OnApplicationQuit()
+    {
+        SaveInventory();
+    }
+
+    public void SaveInventory()
+    {
+        InventorySaveData dataToSave = new InventorySaveData();
+
+        for (int i = 0; i < _inventoryItems.Length; i++)
+        {
+            if (_inventoryItems[i] != null)
+            {
+                dataToSave.slots.Add(new SavedSlotData(_inventoryItems[i].Item.ItemID, _inventoryItems[i].Count));
+            }
+        }
+
+        string json = JsonUtility.ToJson(dataToSave, true);
+
+        File.WriteAllText(_savePath, json);
+        Debug.Log($"Инвентарь сохранен в: {_savePath}");
+    }
+
+    public void LoadInventory()
+    {
+        if (File.Exists(_savePath))
+        {
+            string json = File.ReadAllText(_savePath);
+
+            InventorySaveData loadedData = JsonUtility.FromJson<InventorySaveData>(json);
+
+            for (int i = 0; i < _inventoryItems.Length; i++)
+            {
+                _inventoryItems[i] = null;
+                InventorySlots[i].ClearSlot();
+            }
+
+            for (int i = 0; i < loadedData.slots.Count; i++)
+            {
+                SavedSlotData savedSlot = loadedData.slots[i];
+
+                Item itemToLoad = ItemDataBase.Instance.GetItemByID(savedSlot.itemID);
+
+                if (itemToLoad != null && i < _inventoryItems.Length)
+                {
+                    _inventoryItems[i] = new InventoryItemData { Item = itemToLoad, Count = savedSlot.count };
+                    InventorySlots[i].UpdateSlot(itemToLoad, savedSlot.count);
+                }
+            }
+            Debug.Log("Инвентарь загружен.");
+        }
+        else
+        {
+            Debug.LogWarning("Файл сохранения инвентаря не найден. Начинаем с пустого инвентаря.");
+        }
     }
 
     public void AllRemoveButtonsOff()
@@ -38,10 +101,15 @@ public class InventoryManager : MonoBehaviour
     {
         for (int i = 0; i < _numberOfItems; i++)
         {
-            var prefab = ItemsList[UnityEngine.Random.Range(0, ItemsList.Count)];
             Vector3 randomPosition = GenerateRandomSpawnPosition();
-            var item = Instantiate(prefab, randomPosition, Quaternion.identity);
+            SpawnItemAtPlace(randomPosition);
         }
+    }
+
+    public void SpawnItemAtPlace(Vector3 position)
+    {
+        var prefab = ItemsList[UnityEngine.Random.Range(0, ItemsList.Count)];
+        Instantiate(prefab, position, Quaternion.identity);
     }
 
     public bool AddItem(Item item, int count)
@@ -50,7 +118,6 @@ public class InventoryManager : MonoBehaviour
         {
             if (_inventoryItems[i] != null && _inventoryItems[i].Item.ItemName == item.ItemName)
             {
-                print($"{i} is {_inventoryItems[i].Item}");
                 _inventoryItems[i].Count += count;
                 InventorySlots[i].UpdateSlot(item, _inventoryItems[i].Count);
                 return true;

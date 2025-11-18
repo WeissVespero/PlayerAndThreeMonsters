@@ -99,9 +99,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d18e6bf1123fb064eab399c6365f1700, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemName: Helmet
-  icon: {fileID: 21300000, guid: d811afb0d42fed140806f31df436fbda, type: 3}
-  stackSize: 3
+  ItemName: Helmet
+  ItemID: 1
+  Icon: {fileID: 21300000, guid: d811afb0d42fed140806f31df436fbda, type: 3}
+  StackSize: 1
 --- !u!114 &1596813032957646346
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -114,8 +115,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe11a087f1353b34a9b8b71a30cc01ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemData: {fileID: 2017952569279366222}
-  itemCount: 1
+  ItemData: {fileID: 2017952569279366222}
+  ItemCount: 1
 --- !u!61 &-5945336528857416089
 BoxCollider2D:
   m_ObjectHideFlags: 0
